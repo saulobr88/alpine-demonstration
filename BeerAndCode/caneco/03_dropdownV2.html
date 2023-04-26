@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown V2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #3d68ff; }
+        .cta-btn { color: #3d68ff; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #1947ee; }
+        .nav-item:hover { background: #1947ee; }
+        .account-link:hover { background: #3d68ff; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="mt-2 ml-5 bg-gray-200">
+  <div class="flex-center position-ref full-height">
+    <div class="content">
+        
+      <div class="title m-b-md" x-data="alpineApp">
+        <button x-on:click="showAlert()">Alerta</button>
+        <form @submit.prevent="submitForm">
+          <input type="hidden" name="indice" x-model="formData.indice" />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            name="name"
+            x-model="formData.nome"
+            placeholder="Insira um nome"
+            required
+          />
+          <button 
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm sm:w-auto px-1.5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Salvar
+          </button>
+        </form>
+        <div>
+          <span x-text="getNextIndice()"></span>
+          <span x-show="(formData.nome.length > 0) ? true : false">--</span>
+          <span x-text="getFormData()"></span>
+        </div>
+          <button
+            x-on:click="open=!open"
+            x-bind:class="[open ? 'button-red' : 'button-black' ]"
+          >Dropdown</button> 
+          <div class="lista-wrapper" x-show="open">
+            <hr />
+            <ul x-cloak x-show="open" class="lista">
+              <template x-for="(item,i) in lista" :key="i">
+                <li>
+                  <span x-text="i+1"></span> - <span x-text="item"></span> |
+                  <span x-on:click="deleteFromList(i)">[ X ]</span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+        <!-- <pre x-text="ping"></pre> -->
+      </div>
+
+    </div>
+  </div>
+  
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    const alpineApp = {
+      ping: 0,
+      open: true,
+      lista: [
+        'Danilo', 'Icaro', 'Virgu', 'Caneco'
+      ],
+      getNextIndice() {
+        return this.lista.length;
+      },
+      showAlert () { 
+        console.log('showAlert foi invocado');
+        alert('exibe o alerta'); 
+      },
+      formData: {
+        nome: '',
+      },
+      getFormData() {
+        return `${this.formData.nome}`;
+      },
+      submitForm() {
+        // this.formData.indice = this.getNextIndice();
+        console.log('Form submit');
+        console.log(JSON.stringify(this.formData));
+        this.lista.push(this.formData.nome);
+        this.formData.nome = '';
+        // this.formData.indice = this.getNextIndice();
+      },
+      deleteFromList(indice) {
+        this.lista = this.lista.filter( (el, i) => {
+          return i != indice;
+        });
+        console.log('lista ', this.lista);
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Js Index</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #3d68ff; }
+        .cta-btn { color: #3d68ff; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #1947ee; }
+        .nav-item:hover { background: #1947ee; }
+        .account-link:hover { background: #3d68ff; }
+    </style>
+</head>
+<body class="mt-2 ml-5 bg-gray-300">
+    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+
+    <div class="" x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
+        <textarea
+          name="body"
+          class="char-limiter p-2"
+          rows="5"
+          maxlength="280"
+          x-ref="countme"
+          x-on:keyup="count = $refs.countme.value.length"
+        ></textarea>
+      
+        <div class="">
+          <span x-html="count"></span> /
+          <span x-html="$refs.countme.maxLength"></span>
+        </div>
+      </div>
+
+    <!-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
+    <script defer src="js/plugins/alpinejs/dist/cdn.min.js"></script>
+    
+</body>
+</html>

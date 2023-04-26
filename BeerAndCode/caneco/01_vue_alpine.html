@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJs & AlpineJS</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body class="mt-2 ml-5 bg-gray-300">
+  <div class="flex-center position-ref full-height">
+    <div class="content">
+        <div class="title m-b-md" id="app">
+            {{ ping }}
+        </div>
+
+        <div class="title m-b-md" id="alpine" x-data="alpineApp">
+          <span x-text="ping"></span>
+        </div>
+
+        <div class="links">
+            <a href="#">AlpineJs</a>
+            <a href="#">TailwindCSS</a>
+            <a href="#">VueJs</a>
+        </div>
+    </div>
+  </div>
+  
+  <!-- development version, includes helpful console warnings -->
+  <script defer src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(e) {
+      var vueApp = new Vue({
+        el: '#app',
+        data: {
+          ping: 'pong vue'
+        }
+      });
+    });
+
+    const alpineApp = {
+      ping: 'pong alpine'
+    };
+  </script>
+</body>
+</html>
